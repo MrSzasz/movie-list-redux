@@ -1,3 +1,7 @@
+import React from 'react'
+
+
+
 // import "./App.scss";
 // import $ from "jquery";
 // import { useSelector, useDispatch } from "react-redux";
@@ -78,17 +82,16 @@
 
 // export default App;
 
-import "./App.scss";
 import $ from "jquery";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addMovie,
   deleteMovie,
   updateMovie,
-} from "./features/movies/favMovieListSlice";
+} from "../../features/movies/favMovieListSlice";
 import { v4 as uuid } from "uuid";
 
-function App() {
+const Home = () => {
   const favMovieListArray = useSelector((state) => state.favMovieList);
 
   const dispatch = useDispatch();
@@ -247,3 +250,9 @@ function App() {
 }
 
 export default App;
+
+
+    )
+}
+
+export default Home
