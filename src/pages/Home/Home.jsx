@@ -1,7 +1,8 @@
+import $ from "jquery";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addMovie, deleteMovie } from "../../features/movies/favMovieListSlice";
-
+import { v4 as uuid } from "uuid";
 
 const Home = () => {
   const favMovieListArray = useSelector((state) => state.favMovieList);
@@ -71,7 +72,12 @@ const Home = () => {
                 >
                   DELETE ❌
                 </button>
-                <Link to={"/edit/1"} className="py-2 px-4 bg-blue-600 rounded min-w-fit w-1/2 mx-auto border-2 border-black transition-all hover:scale-105">EDIT ✏</Link>
+                <Link
+                  to={`/edit/${movie.id}`}
+                  className="py-2 px-4 bg-blue-600 rounded min-w-fit w-1/2 mx-auto border-2 border-black transition-all hover:scale-105"
+                >
+                  EDIT ✏
+                </Link>
               </div>
             </div>
           ))}
@@ -79,7 +85,6 @@ const Home = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Home
-
+export default Home;
