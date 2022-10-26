@@ -2,6 +2,7 @@ import {
     createSlice
 } from "@reduxjs/toolkit";
 
+
 const initialState = [];
 
 export const favMovieListSlice = createSlice({
@@ -17,8 +18,7 @@ export const favMovieListSlice = createSlice({
 
         deleteMovie: (state, action) => {
             state.splice(state.indexOf(state.find(movie => movie.id === action.payload)), 1)
-        }
-
+        },
     }
 })
 
