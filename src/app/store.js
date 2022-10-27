@@ -14,7 +14,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import favMovieListSlicer from '../features/movies/favMovieListSlice';
+import watchLaterListSlice from '../features/movies/watchLaterListSlice';
 
 const persistConfig = {
     key: 'moviesInStorage',
@@ -22,7 +22,7 @@ const persistConfig = {
 }
 
 const reducer = combineReducers({
-    favMovieList: favMovieListSlicer
+    watchLaterList: watchLaterListSlice
 })
 
 const persistedReducer = persistReducer(persistConfig, reducer)

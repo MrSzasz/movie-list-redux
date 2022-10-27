@@ -1,10 +1,11 @@
 import $ from "jquery";
-import { AiFillStar, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineClockCircle, AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
 import MainCard from "../../components/MainCard/MainCard";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addMovie } from "../../features/movies/favMovieListSlice";
+import { addMovie } from "../../features/movies/watchLaterListSlice";
+import { Toaster } from "react-hot-toast";
 
 const Home = () => {
   const [moviesArray, setMoviesArray] = useState([]);
@@ -25,10 +26,13 @@ const Home = () => {
       }
     }
   };
+
+  const handleKey = (e) => (e.key === "Enter" ? handleSearch(e) : null);
+
   const dispatch = useDispatch();
 
-  const handleAdd = (name, id, poster) => {
-    // dispatch(addMovie({ name, id, poster }));
+  const handleAdd = (name, id, poster, desc) => {
+    dispatch(addMovie({ name, id, poster, desc }));
   };
 
   return (
@@ -36,10 +40,11 @@ const Home = () => {
       <div className="w-full flex content-between items-center gap-2">
         <div className="flex mx-auto justify-center items-center bg-white rounded-lg overflow-hidden px-4">
           <input
-            type="text"
+            type="search"
             placeholder="Search a movie"
             id="movieQuery"
             className="text-black p-2 focus-visible:outline-none"
+            onKeyDown={handleKey}
           />
           <button
             className="bg-white h-full p-2 text-black"
@@ -48,9 +53,9 @@ const Home = () => {
             <AiOutlineSearch />
           </button>
         </div>
-        <Link to="/favorites">
-          <AiFillStar
-            color="gold"
+        <Link to="/watch-later">
+          <AiOutlineClockCircle
+            color="cyan"
             className="hover:scale-110 transition-all"
             size={30}
           />
@@ -67,22 +72,28 @@ const Home = () => {
                 poster={movie.poster_path}
                 desc={movie.overview}
                 id={movie.id}
-                handleOnClick={() =>
-                  handleAdd(
-                    movie.original_title,
-                    movie.id,
-                    movie.poster_path === null
-                      ? "https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png"
-                      : `https://image.tmdb.org/t/p/w200${movie.poster_path}`
-                  )
-                }
-                bgColor="green"
-                buttonText="favorite"
-              />
+              >
+                <button
+                  onClick={() =>
+                    handleAdd(
+                      movie.original_title,
+                      movie.id,
+                      movie.poster_path === null
+                        ? "https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png"
+                        : `https://image.tmdb.org/t/p/w200${movie.poster_path}`,
+                      movie.overview
+                    )
+                  }
+                  className="w-full bg-green-700 hover:bg-green-800 transition-all border-2 border-black py-1 rounded-lg uppercase"
+                >
+                  add to list
+                </button>
+              </MainCard>
             ))}
           </section>
         )}
       </div>
+      <Toaster />
     </div>
   );
 };
