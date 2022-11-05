@@ -1,6 +1,22 @@
-const MainCard = ({ title, poster, desc, children }) => {
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { addFav } from "../../features/movies/watchLaterListSlice";
+
+const MainCard = ({ title, poster, desc, fav, id, children }) => {
+  const dispatch = useDispatch();
+
+  const handleFav = (movieId) => {
+    dispatch(addFav(movieId));
+  };
+
   return (
     <div className="bg-slate-600 relative w-fit h-fit group overflow-hidden border-4 border-black">
+      <button
+        onClick={()=>handleFav(id)}
+        className="absolute h-4 w-4 right-2 top-2 z-10"
+      >
+        {fav ? <AiFillStar color="gold" /> : <AiOutlineStar color="gold" />}
+      </button>
       <img
         className="max-w-[200px] h-[20em] object-cover"
         src={

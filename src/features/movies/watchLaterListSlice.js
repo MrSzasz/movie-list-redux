@@ -28,6 +28,13 @@ export const watchLaterListSlice = createSlice({
         deleteMovie: (state, action) => {
             state.splice(state.indexOf(state.find(movie => movie.id === action.payload)), 1)
         },
+
+        addFav: (state, action) => {
+            const findMovie = state.find(movie => movie.id === action.payload)
+            if (findMovie) {
+                findMovie.fav = !findMovie.fav
+            }
+        },
     }
 })
 
@@ -36,5 +43,6 @@ export const {
     addMovie,
     updateMovie,
     deleteMovie,
+    addFav,
 } = watchLaterListSlice.actions
 export default watchLaterListSlice.reducer;

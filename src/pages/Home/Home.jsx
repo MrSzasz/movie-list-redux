@@ -32,7 +32,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const handleAdd = (name, id, poster, desc) => {
-    dispatch(addMovie({ name, id, poster, desc }));
+    dispatch(addMovie({ name, id, poster, desc, fav: false }));
   };
 
   return (

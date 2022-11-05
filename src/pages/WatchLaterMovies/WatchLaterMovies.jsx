@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import MainCard from "../../components/MainCard/MainCard";
 import { Link } from "react-router-dom";
-import { deleteMovie } from "../../features/movies/watchLaterListSlice";
+import { addFav, deleteMovie } from "../../features/movies/watchLaterListSlice";
 
 const WatchLaterMovies = () => {
   const watchLaterArray = useSelector((state) => state.watchLaterList);
@@ -21,6 +21,10 @@ const WatchLaterMovies = () => {
       >
         ⬅ BACK
       </Link>
+      {/* <select className="py-3 px-6 bg-red-500 text-white border-black transition-all hover:scale-105" name="movieFilter" id="movieFilter">
+        <option value="all">all</option>
+        <option value="fav">fav</option>
+      </select> */}
       <div>
         {watchLaterArray?.length !== 0 && (
           <section className="flex flex-wrap justify-evenly gap-y-4">
@@ -31,6 +35,8 @@ const WatchLaterMovies = () => {
                 desc={movie.desc}
                 name={movie.name}
                 poster={movie.poster}
+                fav={movie.fav}
+                id={movie.id}
               >
                 <button
                   onClick={() => handleDelete(movie.id)}
